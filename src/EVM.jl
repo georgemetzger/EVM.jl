@@ -1,5 +1,7 @@
 module EVM
 
+export forecast
+
 # Adjustable Parameters
 cost_fraction = 0.4
 peakedness_fraction = 0.8
