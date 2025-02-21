@@ -1,6 +1,6 @@
 name = "EVM"
 uuid = "ffbb28d6-2a97-4f74-a55f-edc19760e4bf"
-authors = ["georgemetzger <george@metzger.sh> and contributors"]
+authors = ["georgemetzger and contributors"]
 version = "1.0.0-DEV"
 
 [compat]
