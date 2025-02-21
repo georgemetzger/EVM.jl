@@ -15,7 +15,7 @@ forecast("10/1/2025", 50000000, 1080, 0.056)
 
 <img src="https://github.com/georgemetzger/EVM.jl/blob/img/evm_forecast.png?raw=true" width = 700></br>
 
-<img src="https://github.com/georgemetzger/EVM.jl/blob/img/plot.png?raw=true" width = 700>~~</br>
+<img src="https://github.com/georgemetzger/EVM.jl/blob/img/plot.png?raw=true">
 
  There are four variables with default values that can be changed to adjust the shape of the S-curve and smooth out the costs as needed for budget planning:
 
