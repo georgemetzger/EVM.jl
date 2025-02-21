@@ -21,10 +21,3 @@ forecast("10/1/2025", 50000000, 1080, 0.056)
 `peakedness_fraction = 0.8` - The maximum annual cost.
 `start_buffer = 90` - Time lag for project start from anticipated start date.
 `end_buffer = 120` - Time lag for project completion from anticipated end date.
-
-
-[![Build Status][image-1]][1]
-
-[1]:	https://github.com/georgemetzger/EVM.jl/actions/workflows/CI.yml?query=branch%3Amain
-
-[image-1]:	https://github.com/georgemetzger/EVM.jl/actions/workflows/CI.yml/badge.svg?branch=main
