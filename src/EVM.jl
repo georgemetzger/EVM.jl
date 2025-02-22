@@ -4,12 +4,6 @@ using DataFrames, Dates
 
 export forecast
 
-# Adjustable Parameters
-cost_fraction = 0.4
-peakedness_fraction = 0.8
-start_buffer = 90
-end_buffer = 120
-
 # Functions
 function ccf(t)
 	α = cost_fraction < 0.5 ? ((1-peakedness_fraction)*(cost_fraction-0.1875))/0.625 : (peakedness_fraction*(cost_fraction-0.8125)+(cost_fraction-0.1875))/0.625
