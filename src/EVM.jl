@@ -5,13 +5,13 @@ using DataFrames, Dates
 export forecast
 
 # Functions
-function ccf(t)
+function ccf(t, cost_fraction, peakedness_fraction)
 	α = cost_fraction < 0.5 ? ((1-peakedness_fraction)*(cost_fraction-0.1875))/0.625 : (peakedness_fraction*(cost_fraction-0.8125)+(cost_fraction-0.1875))/0.625
 	β = cost_fraction< 0.5 ? peakedness_fraction*(cost_fraction-0.1875)/0.3125 : peakedness_fraction*(0.8125-cost_fraction)/0.3125
 	return 10*t^2*(1-t)^2*(α+β*t)+t^4*(5-4*t)
 end
 
-function calculate_dates(start_date, days)
+function calculate_dates(start_date, days, start_buffer, end_buffer)
 	start_date = Date(start_date, "mm/dd/yyyy")
 	months = 0
 	days = days + end_buffer
@@ -46,7 +46,7 @@ function calculate_fy(dates)
 	return fiscal_years
 end
 
-function calculate_time(days)
+function calculate_time(days, end_buffer)
 	time_vector = collect(30:30:(days+end_buffer))
 	percent_complete = Float64[]
 	for i in eachindex(time_vector)
@@ -62,11 +62,11 @@ function calculate_time(days)
 	return percent_complete
 end
 
-function forecast(start_date, cost, days, rate)
-	dates = calculate_dates(start_date, days)
-	time_percentage = calculate_time(days)
+function forecast(start_date, cost, days, rate; start_buffer = 90, end_buffer = 120, cost_fraction = 0.4, peakedness_fraction = 0.8)
+	dates = calculate_dates(start_date, days, start_buffer, end_buffer)
+	time_percentage = calculate_time(days, end_buffer)
 	fiscal_year = calculate_fy(dates)
-	ccf_values = ccf.(time_percentage)
+	ccf_values = ccf.(time_percentage, cost_fraction, peakedness_fraction)
 	running_expenditures = ccf_values*cost
 	expenditures = Float64[]
 	for i in eachindex(ccf_values)
