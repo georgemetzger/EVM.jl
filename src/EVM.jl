@@ -14,12 +14,8 @@ end
 function calculate_dates(start_date, days, start_buffer, end_buffer)
 	start_date = Date(start_date, "mm/dd/yyyy")
 	months = 0
-	days = days + end_buffer
-	if days % 30 == 0
-		months = days/30
-	else
-		months = days/30+1
-	end
+	total_days = round((days + end_buffer) / 30, RoundUp) * 30
+	months = total_days/30
 	index = 1
 	next_date = start_date + Dates.Month(start_buffer/30)
 	dates = Date[next_date]
@@ -47,10 +43,11 @@ function calculate_fy(dates)
 end
 
 function calculate_time(days, end_buffer)
-	time_vector = collect(30:30:(days+end_buffer))
+	total_days = round((days + end_buffer) / 30, RoundUp) * 30
+	time_vector = collect(30:30:total_days)
 	percent_complete = Float64[]
 	for i in eachindex(time_vector)
-		current_value = time_vector[i] / (days+end_buffer)
+		current_value = time_vector[i] / total_days
 		if time_vector[i] == time_vector[end] && current_value != 1.0
 			push!(percent_complete, current_value)
 			push!(percent_complete, 1.0)
