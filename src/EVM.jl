@@ -17,7 +17,7 @@ function calculate_dates(start_date, days, start_buffer, end_buffer)
 	total_days = round((days + end_buffer) / 30, RoundUp) * 30
 	months = total_days/30
 	index = 1
-	next_date = start_date + Dates.Month(start_buffer/30)
+	next_date = start_date + Dates.Month(round(start_buffer/30, RoundUp))
 	dates = Date[next_date]
 	while index < months
 		next_date = next_date + Dates.Month(1)
